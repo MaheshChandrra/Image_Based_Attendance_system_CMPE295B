@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Statistics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .page-container {
+            margin-top: 50px;
+            margin-left: 5%;
+            margin-right: 5%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+        }
+        .card {
+            margin-bottom: 50px;
+        }
+        .navbar-brand {
+			margin-left: 10px;
+		}
+        /* body {
+            background-color: #c6ebb2;
+        } */
+        body {
+            background-color: white;
+        }
+        /* .navbar-color {
+            background-color: #acc598;
+        } */
+        .navbar-color {
+            background-color: #d0d3e7;
+        }
+        .navbar-brand {
+			margin-left: 10px;
+		}
+        .card:hover {
+            box-shadow: 1px 8px 20px grey;
+            -webkit-transition:  box-shadow .1s ease-in;
+            transition:  box-shadow .1s ease-in;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #007bff; /* Replace with desired background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white; /* Replace with desired text color */
+        }
+        .row {
+            justify-content: center;
+        }
+        .col-sm-4 {
+            max-width: 80%;
+        }
+        .heading {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+        .main-svg {
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        .left {
+            flex: 2;
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+        .right {
+            flex-grow: 1;
+            flex-basis: 0;
+            margin-left: 5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-color">
+        <a class="navbar-brand" href="/dashboard"><img src="{{ url_for('static', filename='images/login_logo.png') }}" width="50" height="50"/>Attendance Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ username }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/viewclasses">View my classes</a>
+                <a class="dropdown-item" href="/logout">logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <br />
+    <br />
+    <br />
+    <div class="page-container">
+        <div class="left">
+        <div class="row">
+            <div class="col-sm-4 heading">
+                <div class="">
+                    <h1>Course Name</h1>
+                </div>
+            </div>
+            <div class="col-sm-4 heading">
+                <div>
+                    <h1>Students Enrolled</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-sm-4 heading">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ course }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 heading">
+                <div class="circle">
+                    {{ total_students }}
+                </div>
+            </div>
+        </div>
+        <!-- <h2>Stats for {{ course }}</h2> -->
+        <div class="row">
+            {{ attendance_html|safe }}
+            {{ attendance_by_date_html|safe }}
+            <!-- <div class="col-sm-4">
+                {{ attendance_html|safe }}
+            </div> 
+            <div class="col-sm-4">
+                {{ attendance_by_date_html|safe }}
+            </div> -->
+            <div class="col-sm-4">
+                
+            </div>
+        </div>
+        <!-- <div class="row">
+            {{ attendance_by_date_html|safe }}
+        </div> -->
+        </div>
+        <div class="right">
+            <div class="row1">
+                <h1>Attendance sorted by date</h1>
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>Student Name</th>
+                          <th>Status</th>
+                          <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if attendance_df %}
+                            {% for row in attendance_df %}
+                                <tr>
+                                    <td>
+                                        {{ loop.index }}
+                                    </td>
+                                    <td>
+                                        {{ row.StudentName_SID }}
+                                    </td>
+                                    <td>
+                                        {{ row.Status }}
+                                    </td>
+                                    <td>
+                                        {{ row.AttendedDate }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $('#example').DataTable();
+        });
+      </script>
+</body>
+</html>

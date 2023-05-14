@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Zipped File</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Upload Zipped File</h1>
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select a zipped file:</label>
+                <input type="file" class="form-control-file" id="file" name="file">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <h1>Mark Attendance</h1>
+        <form method="post" action="/mark_attendance" enctype="multipart/form-data">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="class_1" name="class_name">
+                <label for="file">Input group picture of students</label>
+                <input type="file" class="form-control-file" id="file" name="file">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- <!doctype html>
+<html>
+<head>
+    <title>File Upload Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">File Upload Example</h1>
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="card-deck">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Upload Folder</h5>
+                            <form action="/upload_folder" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" class="input-file-max-fs" id="folder-upload" name="folder-upload" webkitdirectory directory multiple>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload Folder</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Upload Picture</h5>
+                            <form action="/upload-picture" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" id="picture-upload" name="picture-upload" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload Picture</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0 -->

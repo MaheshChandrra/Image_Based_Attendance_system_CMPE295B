@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>About</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <style>
+            .navbar-brand {
+			    margin-left: 10px;
+		    }
+            /* body {
+                background-color: #c6ebb2;
+            }
+            .navbar-color {
+                background-color: #acc598;
+            } */
+            /* body {
+                background-color: white;
+                background-image: url("{{ url_for('static', filename='images/about_img1.jpg') }}");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 100% auto;
+            } */
+            .navbar-color {
+                background-color: #d0d3e7;
+            }
+            .navbar-brand {
+			    margin-left: 10px;
+		    }
+            .card:hover {
+                box-shadow: 1px 8px 20px grey;
+                -webkit-transition:  box-shadow .1s ease-in;
+                transition:  box-shadow .1s ease-in;
+            }
+            body {
+                /* font-family: Arial, sans-serif; */
+                background-color: white;
+                }
+
+                h1 {
+                color: #333;
+                text-align: center;
+                }
+
+                p {
+                /* color: #666; */
+                line-height: 1.6;
+                font-weight: 600;
+                }
+
+                .container {
+                /* max-width: 600px; */
+                margin: 0 auto;
+                }
+
+                .image {
+                text-align: center;
+                margin-bottom: 20px;
+                }
+
+                .image img {
+                max-width: 100%;
+                height: auto;
+                }
+
+                .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                }
+
+                .button:hover {
+                background-color: #666;
+                }
+                li {
+                    font-weight: 600;
+                }
+                .about-img {
+                    transition: transform ease-in-out 0.3s;
+                    border: 1px solid;
+                    border-radius: 10px;
+                }
+                .about-img:hover {
+                    transform: scale(1.2);
+                }
+                
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light navbar-color">
+            <a class="navbar-brand" href="/dashboard"><img src="{{ url_for('static', filename='images/login_logo.png') }}" width="50" height="50"/>Attendance Tracker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/viewclasses">View my classes</a>
+                    <a class="dropdown-item" href="/logout">logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <br />
+        <br />
+        <br />
+
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col-sm-4">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title"></h4>
+                                <p class="card-text">This feature allows professors to configure class that takes in the student pictures.The AI extracts features from the faces and uses to tract the attendance of students.</p> 
+                            <p>
+                               
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>  -->
+            <!-- <div class="row">
+                <div class="col-md-6">
+                    <img alt="Image" src="{{ url_for('static', filename='images/about_img1.jpg') }}" />
+                </div>
+                <div class="col-md-6 col-lg-5 ml-auto d-flex align-items-center mt-4 mt-md-0 my-div">
+                    <div>
+                        <h2>Introduction</h2>
+                        <p>Person identification and processing the information of the person by looking at the person’s image is a tedious task if processed by a human. The earlier built systems for facial recognition are not robust and time-consuming. With computer vision algorithms growing rapidly in today’s world, we plan to build a system that can perform facial recognition and process the information of the person using Neural Networks. This application when provided with the image of the audience can recognize all the attendees in the image and store their information on the databases for later use. Earlier systems used for facial recognition are time-consuming, as one source image is compared with a series of images in the image database. A person’s image with a closed resemblance is returned as a result, and the person’s information is tagged with the source image. These systems require millions of images in all possible orientations to perform their duty. The models built after these utilize neural networks, these systems require high image samples to train on. The data collection is a hectic task for implementing these models. The models we are trying to build require very less samples as compared to earlier models. Attendance tracking for events is a one-time task, so we try to build a model that can eliminate large training times and large amounts of data. In this project, we are intending to create an AI Image recognition system to track the attendance of participants by analyzing facial features and marking their presence in the database. We are planning to follow the process in the following steps Image Acquisition, Image Detection, Attendance Registration, and Monitoring. We plan to build a neural network inspired by the latest Neural Network architectures that are available for computer vision tasks.</p>
+                    </div>
+                </div>
+            </div> -->
+            <h1>About the Facial Recognition System</h1>
+                <div class="image">
+                    <img class="about-img" src="{{ url_for('static', filename='images/login.png') }}" alt="Facial Recognition System" />
+                </div>
+                <p>
+                    Person identification and processing the information of the person by looking at the person's image is a tedious task if processed by a human. The earlier built systems for facial recognition are not robust and time-consuming. With computer vision algorithms growing rapidly in today's world, we plan to build a system that can perform facial recognition and process the information of the person using Neural Networks.
+                </p>
+                <p>
+                    This application, when provided with the image of the audience, can recognize all the attendees in the image and store their information in the databases for later use. The models we are trying to build require very few samples as compared to earlier models, reducing training times and data requirements. In this project, we intend to create an AI Image recognition system to track the attendance of participants by analyzing facial features and marking their presence in the database.
+                </p>
+                <p>
+                    Our system follows the process in the following steps:
+                </p>
+                <ol>
+                    <li>Image Acquisition</li>
+                    <li>Image Detection</li>
+                    <li>Attendance Registration</li>
+                    <li>Monitoring</li>
+                </ol>
+                <p>
+                    We plan to build a neural network inspired by the latest Neural Network architectures available for computer vision tasks.
+                </p>
+                <p>
+                    <a class="button" href="/contact">Meet the Team</a>
+                </p>
+        </div>
+
+        {{ classes_rendered_html | safe}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

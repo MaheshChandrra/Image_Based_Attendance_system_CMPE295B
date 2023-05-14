@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Gallery</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .card-img-top {
+            width: 100%;
+        }
+        /* body {
+                background-color: #c6ebb2;
+            }
+            .navbar-color {
+                background-color: #acc598;
+            } */
+            body {
+                background-color: white;
+            }
+            .navbar-color {
+                background-color: #d0d3e7;
+            }
+            .navbar-brand {
+			    margin-left: 10px;
+		    }
+            .card:hover {
+                cursor: pointer;
+                box-shadow: 1px 8px 20px grey;
+                -webkit-transition:  box-shadow .1s ease-in;
+                transition:  box-shadow .1s ease-in;
+            }
+            .status_class {
+                width: 20%;
+                margin-left: auto;
+                margin-right: 10px;
+                margin-top: 10px;
+            }
+            .card_content {
+                display: flex;
+            }
+            .col-md-4 {
+                min-width: 0 !important;
+            }
+            .row {
+                margin-top: 50px;
+            }
+            .active {
+                background-color: #88bbe5;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-color">
+        <a class="navbar-brand" href="/dashboard"><img src="{{ url_for('static', filename='images/login_logo.png') }}" width="50" height="50"/>Attendance Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ username }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/viewclasses">View my classes</a>
+                <a class="dropdown-item" href="/logout">logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- <h1>Person Gallery</h1> -->
+        <h2>Attendance for {{ course }} on {{ date }}</h2>
+        <!-- <h2>{{ date }}</h2> -->
+        {% if persons_with_attendance %}
+        <div class="row">
+            {% for person in persons_with_attendance %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <img class="card-img-top" src="{{ url_for('static', filename='images/' + person.image) }}" alt="{{ person.name }}" width="100" height="300">
+                        <div class="card_content">
+                            <h4 class="card-title" style="margin-top: 20px;">{{ person.display_name }}</h4>
+                            {% if person.attendance_status %}
+                                <div class="status_class">
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 117.72 117.72" style="enable-background:new 0 0 117.72 117.72" xml:space="preserve"><style type="text/css"><![CDATA[.st0{fill:#01A601;}]]></style><g><path class="st0" d="M58.86,0c9.13,0,17.77,2.08,25.49,5.79c-3.16,2.5-6.09,4.9-8.82,7.21c-5.2-1.89-10.81-2.92-16.66-2.92 c-13.47,0-25.67,5.46-34.49,14.29c-8.83,8.83-14.29,21.02-14.29,34.49c0,13.47,5.46,25.66,14.29,34.49 c8.83,8.83,21.02,14.29,34.49,14.29s25.67-5.46,34.49-14.29c8.83-8.83,14.29-21.02,14.29-34.49c0-3.2-0.31-6.34-0.9-9.37 c2.53-3.3,5.12-6.59,7.77-9.85c2.08,6.02,3.21,12.49,3.21,19.22c0,16.25-6.59,30.97-17.24,41.62 c-10.65,10.65-25.37,17.24-41.62,17.24c-16.25,0-30.97-6.59-41.62-17.24C6.59,89.83,0,75.11,0,58.86 c0-16.25,6.59-30.97,17.24-41.62S42.61,0,58.86,0L58.86,0z M31.44,49.19L45.8,49l1.07,0.28c2.9,1.67,5.63,3.58,8.18,5.74 c1.84,1.56,3.6,3.26,5.27,5.1c5.15-8.29,10.64-15.9,16.44-22.9c6.35-7.67,13.09-14.63,20.17-20.98l1.4-0.54H114l-3.16,3.51 C101.13,30,92.32,41.15,84.36,52.65C76.4,64.16,69.28,76.04,62.95,88.27l-1.97,3.8l-1.81-3.87c-3.34-7.17-7.34-13.75-12.11-19.63 c-4.77-5.88-10.32-11.1-16.79-15.54L31.44,49.19L31.44,49.19z"/></g></svg>
+                                </div>
+                            {% else %}
+                                <div class="status_class">
+                                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 122.88"><defs><style>.cls-1{fill:#f44336;fill-rule:evenodd;}</style></defs><title>close-red</title><path class="cls-1" d="M61.44,0A61.44,61.44,0,1,1,0,61.44,61.44,61.44,0,0,1,61.44,0ZM74.58,36.8c1.74-1.77,2.83-3.18,5-1l7,7.13c2.29,2.26,2.17,3.58,0,5.69L73.33,61.83,86.08,74.58c1.77,1.74,3.18,2.83,1,5l-7.13,7c-2.26,2.29-3.58,2.17-5.68,0L61.44,73.72,48.63,86.53c-2.1,2.15-3.42,2.27-5.68,0l-7.13-7c-2.2-2.15-.79-3.24,1-5l12.73-12.7L36.35,48.64c-2.15-2.11-2.27-3.43,0-5.69l7-7.13c2.15-2.2,3.24-.79,5,1L61.44,49.94,74.58,36.8Z"/></svg>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ person.display_name }}Modal">Edit</button> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal fade" id="{{ person.display_name }}Modal" tabindex="-1" role="dialog" aria-labelledby="{{ person.display_name }}ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="{{ person.display_name }}ModalLabel">{{ person.display_name }} Images</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="/update_attendance" enctype="multipart/form-data">
+                                <div class="row" style="margin-top: 0; align-items: center;">
+                                    <div class="col-md-3">
+                                        <img src="{{ url_for('static', filename='images/' + person.image) }}" width="150" height="150">
+                                    </div>
+                                    <div class="col-md-3" style="margin-left: 5rem;">
+                                        {% if person.attendance_status %}
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-light stretched-link active">
+                                            <input type="radio" name="attendance_status" id="present" checked> Present
+                                            </label>
+                                            <label class="btn btn-light stretched-link">
+                                            <input type="radio" name="attendance_status" id="abscent" > Abscent
+                                            </label>
+                                        </div>
+                                        {% else %}
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-light stretched-link">
+                                            <input type="radio" name="attendance_status" id="present"> Present
+                                            </label>
+                                            <label class="btn btn-light stretched-link active">
+                                            <input type="radio" name="attendance_status" id="abscent" checked> Abscent
+                                            </label>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" style="margin-left: 75%;">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            {% endfor %}
+        </div>
+        {% else %}
+            <div>
+                <h1>Not data found, please mark attendance for given date</h1>
+            </div>
+        {% endif %}
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function enableSubmitButton(event) {
+            let currentDate = "{{ attendance_date }}";
+            // console.log(currentDate);
+            document.getElementById('getAttendanceBtn').disabled = (currentDate === event.target.value);
+        }
+    </script>
+</body>
+</html>
