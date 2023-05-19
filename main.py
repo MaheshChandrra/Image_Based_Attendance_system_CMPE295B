@@ -320,6 +320,9 @@ def viewclasses():
     directory_path = app.config['UPLOAD_FOLDER']+"/"+current_user.id.split("@")[0]
 
     if not os.path.exists(directory_path):
+        return render_template("view_classes.html",cards=[],username=current_user.id)
+    
+    if not os.path.exists("static/"+current_user.id.split("@")[0]+"/"):
         shutil.copytree(directory_path, "static/"+current_user.id.split("@")[0]+"/")
 
     # Get a list of all folders in the directory
@@ -471,6 +474,8 @@ def viewattendance():
 
     # Create dataframe for total attendees from the latest class
     attendance = list(attendance_collection.find({"name_professor_section": name_professor_section}))
+    if len(attendance) == 0:
+        return render_template('get_stats.html', noData='true', course=name_professor_section, username=current_user.id)
     attendance_df = pd.DataFrame(attendance)
     # attendance_df["AttendedDate"] = pd.to_datetime(attendance_df["AttendedDate"])
     latest_date = attendance_df["AttendedDate"].max()
@@ -644,4 +649,4 @@ def get_courses():
     return cards
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port="8082", debug=True)

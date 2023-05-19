@@ -67,6 +67,7 @@
 
         <div class="container">
             <div class="row">
+                {% if cards %}
                 {% for card in cards %}
                 <div class="col-md-4">
                     <!-- <div class="card mb-4 shadow-sm"> -->
@@ -104,6 +105,11 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <div>
+                    <h2>No classes registered under this user</h2>
+                </div>
+                {% endif %}
             </div>
         </div>
 
