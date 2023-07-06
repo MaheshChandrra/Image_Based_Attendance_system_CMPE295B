@@ -4,7 +4,7 @@
 
 | Team Member                     | Email                                 |
 |---------------------------------|---------------------------------------|
-| Mareedu Mahesh Chandra          | maheshchandra.mareedu@sjsu.edu        |
+| Mareedu Mahesh Chandra (Team Lead)         | maheshchandra.mareedu@sjsu.edu        |
 | Rohith Kumar Reddy Vallamreddy  | rohithkumarreddy.vallamreddy@sjsu.edu |
 | Venkata Siva Prasad Kakkera     | venkatasivaprasad.kakkera@sjsu.edu    |
 | Trivikram Thopugunta            | trivikram.thopugunta@sjsu.edu         |
